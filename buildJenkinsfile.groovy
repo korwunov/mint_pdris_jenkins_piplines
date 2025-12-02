@@ -1,5 +1,10 @@
 pipeline {
     agent any
+
+    parameters {
+        string(name: 'branchName', defaultValue: 'main', description: 'Branch name to build from')
+        string(name: 'serviceName', defaultValue: 'Bookmark', description: 'Folder name for service from repo')
+    }
     
     tools {
         jdk 'jdk17'  
@@ -27,34 +32,42 @@ pipeline {
                 """
             }
         }
+
         stage('git clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/Aduscias/AllureExample.git'
+                git branch: params.branchName, url: 'https://github.com/Aduscias/AllureExample.git'
+                sh "cd ${params.serviceName}"
+            }
+        }
+
+        stage('Build service') {
+            steps {
+                sh "mvn -B -DskipTests clean package"
             }
         }
 
 
         stage('SonarQube Analysis') {
-
+            steps {
+                print('SonarQube Analysis stage here')
+            }
         }
         
         stage('Run test') {
-           
+            steps {
+                sh "mvn test"
+            }
         }
        
         stage('Generate Allure report') {
             steps {
-
+                allure includeProperties: false, jdk: '', resultPolicy: 'LEAVE_AS_IS', results: [[path: 'target/allure-results']]
             }
         }
         
         stage('Deploy to Nexus') {
-            
-        }
-    
-        stage('Run Job') {
             steps {
-               
+                print('Deploy to Nexus stage here')
             }
         }
     }
