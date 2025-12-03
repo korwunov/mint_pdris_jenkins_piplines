@@ -7,16 +7,16 @@ pipeline {
     }
     
     tools {
-        jdk 'jdk17'  
+        jdk 'jdk21'  
     }
     
-    environment {
-        // Явно устанавливаем переменные окружения
-        JAVA_HOME = "$JAVA_HOME"
-        PATH = ''
-        NEXUS_URL = ''
-        NEXUS_CREDENTIALS_ID = ''
-    }
+    // environment {
+    //     // Явно устанавливаем переменные окружения
+    //     JAVA_HOME = "$JAVA_HOME"
+    //     PATH = ''
+    //     NEXUS_URL = ''
+    //     NEXUS_CREDENTIALS_ID = ''
+    // }
 
     stages {
         stage('Environment Check') {
