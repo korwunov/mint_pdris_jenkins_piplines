@@ -71,4 +71,16 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            steps {
+                script {
+                    sh "ls"
+                    deleteDir()
+                    sh "ls"
+                }
+            }
+        }
+    }
 }
