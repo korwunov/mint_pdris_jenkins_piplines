@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'branchName', defaultValue: 'main', description: 'Branch name to build from')
-        string(name: 'serviceName', defaultValue: 'BookmarkService', description: 'Folder name for service from repo')
+        string(name: 'serviceName', defaultValue: 'bookmark-service', description: 'Service (module) name')
     }
     
     tools {
@@ -35,13 +35,13 @@ pipeline {
 
         stage('git clone') {
             steps {
-                git branch: params.branchName, url: 'https://github.com/spring-projects/spring-petclinic.git'
+                git branch: params.branchName, url: 'https://github.com/korwunov/DigitalBookmark.git'
             }
         }
 
         stage('Build service') {
             steps {
-                sh "mvn -B -DskipTests clean package"
+                sh "mvn -B -DskipTests -pl ${params.serviceName} clean package"
             }
         }
 
@@ -54,7 +54,7 @@ pipeline {
         
         stage('Run test') {
             steps {
-                sh "mvn test"
+                sh "mvn -pl ${params.serviceName} test"
             }
         }
        
