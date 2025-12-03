@@ -6,9 +6,9 @@ pipeline {
         string(name: 'serviceName', defaultValue: 'Bookmark', description: 'Folder name for service from repo')
     }
     
-    tools {
-        jdk 'jdk17'  
-    }
+    // tools {
+    //     jdk 'jdk17'  
+    // }
     
     environment {
         // Явно устанавливаем переменные окружения
@@ -35,7 +35,7 @@ pipeline {
 
         stage('git clone') {
             steps {
-                git branch: params.branchName, url: 'https://github.com/Aduscias/AllureExample.git'
+                git branch: params.branchName, url: 'https://github.com/korwunov/DigitalBookmark.git'
                 sh "cd ${params.serviceName}"
             }
         }
