@@ -52,7 +52,7 @@ pipeline {
                 SONAR_TOKEN = credentials('sonarqube_token')
             }
             steps {
-                sh "mvn sonar:sonar -Dsonar.projectKey=${params.serviceName} -Dsonar.host.url=$SONAR_HOST -Dsonar.token=$SONAR_TOKEN -Dsonar.exclusions=**/target/**/*"
+                sh "mvn sonar:sonar -Dsonar.projectKey=Digitalbookmark -Dsonar.host.url=$SONAR_HOST -Dsonar.token=$SONAR_TOKEN -Dsonar.exclusions=**/target/**/*"
             }
         }
         
