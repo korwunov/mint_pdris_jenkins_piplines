@@ -6,13 +6,13 @@ pipeline {
         string(name: 'serviceName', defaultValue: 'Bookmark', description: 'Folder name for service from repo')
     }
     
-    // tools {
-    //     jdk 'jdk17'  
-    // }
+    tools {
+        jdk 'jdk17'  
+    }
     
     environment {
         // Явно устанавливаем переменные окружения
-        JAVA_HOME = ''
+        JAVA_HOME = "$JAVA_HOME"
         PATH = ''
         NEXUS_URL = ''
         NEXUS_CREDENTIALS_ID = ''
