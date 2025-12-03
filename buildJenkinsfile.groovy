@@ -47,8 +47,12 @@ pipeline {
 
 
         stage('SonarQube Analysis') {
+            environment {
+                SONAR_HOST = "http://localhost:9000"
+                SONAR_TOKEN = credentials('sonarqube_token')
+            }
             steps {
-                print('SonarQube Analysis stage here')
+                sh "mvn sonar:sonar -Dsonar.projectKey=Digitalbookmark -Dsonar.host.url=$SONAR_HOST -Dsonar.login=$SONAR_TOKEN"
             }
         }
         
