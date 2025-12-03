@@ -71,13 +71,13 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            script {
-                sh "ls"
-                deleteDir()
-                sh "ls"
-            }
-        }
-    }
+    // post {
+    //     always {
+    //         script {
+    //             sh "ls"
+    //             deleteDir()
+    //             sh "ls"
+    //         }
+    //     }
+    // }
 }
