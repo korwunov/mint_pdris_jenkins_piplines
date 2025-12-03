@@ -42,7 +42,7 @@ pipeline {
 
         stage('Build service') {
             steps {
-                sh "mvn -B -DskipTests -pl ${params.serviceName} clean package"
+                sh "/usr/lib/maven/apache-maven-3.9.11/bin/mvn -B -DskipTests clean package"
             }
         }
 
@@ -55,7 +55,7 @@ pipeline {
         
         stage('Run test') {
             steps {
-                sh "mvn -pl ${params.serviceName} test"
+                sh "/usr/lib/maven/apache-maven-3.9.11/bin/mvn -pl ${params.serviceName} test"
             }
         }
        
