@@ -42,7 +42,7 @@ pipeline {
 
         stage('Build service') {
             steps {
-                sh "mvn -B -DskipTests clean package"
+                sh "mvn -B -DskipTests -pl ${params.serviceName} clean package"
             }
         }
 
@@ -55,7 +55,7 @@ pipeline {
         
         stage('Run test') {
             steps {
-                sh "mvn test"
+                sh "mvn -pl ${params.serviceName} test"
             }
         }
        
