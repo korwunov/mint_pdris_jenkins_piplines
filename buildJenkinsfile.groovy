@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'branchName', defaultValue: 'main', description: 'Branch name to build from')
-        string(name: 'serviceName', defaultValue: 'bookmark-service', description: 'Service (module) name')
+        string(name: 'serviceName', defaultValue: 'BookmarkService', description: 'Service (module) name')
     }
     
     tools {
@@ -60,7 +60,7 @@ pipeline {
        
         stage('Generate Allure report') {
             steps {
-                allure includeProperties: false, jdk: '', resultPolicy: 'LEAVE_AS_IS', results: [[path: 'target/allure-results']]
+                allure includeProperties: false, jdk: '', resultPolicy: 'LEAVE_AS_IS', results: [[path: "${params.serviceName}/target/allure-results"]]
             }
         }
         
