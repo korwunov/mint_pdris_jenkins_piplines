@@ -68,9 +68,34 @@ pipeline {
             }
         }
         
-        stage('Deploy to Nexus') {
+        stage('Upload to Nexus') {
+            environment {
+                NEXUS_URL = 'nexus:8081'
+                NEXUS_CREDENTIALS_ID = 'nexus_user_password'
+            }
             steps {
-                print('Deploy to Nexus stage here')
+                script {
+                    def jarName = ''
+                    if (params.serviceName) == 'BookmarkService' {jarName = 'bookmark-service'}
+                    if (params.serviceName) == 'AuthService' {jarName = 'auth-service'}
+                    if (params.serviceName) == 'FileService' {jarName = 'file-service'}
+
+                    def artifactVersion = "1.0.${env.BUILD_NUMBER}" // Example versioning
+                    nexusArtifactUploader(
+                        nexusVersion: 'nexus3',
+                        protocol: 'http',
+                        nexusUrl: env.NEXUS_URL,
+                        groupId: "com.digitalbookmark",
+                        version: artifactVersion,
+                        credentialsId: env.NEXUS_CREDENTIALS_ID,
+                        repository: 'maven-releases',
+                        artifacts: [
+                            [
+                                artifactId: params.serviceName, classifier: '', file: "${params.serviceName}/target/${jarName}-0.0.1-SNAPSHOT.jar", type: 'jar'
+                            ]
+                        ]
+                    )
+                }
             }
         }
     }
