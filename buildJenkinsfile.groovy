@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'branchName', defaultValue: 'main', description: 'Branch name to build from')
-        string(name: 'serviceName', defaultValue: 'Bookmark', description: 'Folder name for service from repo')
+        string(name: 'serviceName', defaultValue: 'BookmarkService', description: 'Folder name for service from repo')
     }
     
     tools {
