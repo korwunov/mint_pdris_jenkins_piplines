@@ -74,12 +74,10 @@ pipeline {
 
     post {
         always {
-            steps {
-                script {
-                    sh "ls"
-                    deleteDir()
-                    sh "ls"
-                }
+            script {
+                sh "ls"
+                deleteDir()
+                sh "ls"
             }
         }
     }
