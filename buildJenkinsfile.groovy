@@ -41,7 +41,7 @@ pipeline {
 
         stage('Build service') {
             steps {
-                sh "mvn -B -DskipTests clean package"
+                sh "/usr/lib/maven/apache-maven-3.9.11/bin/mvn -B -DskipTests clean package"
             }
         }
 
@@ -54,7 +54,7 @@ pipeline {
         
         stage('Run test') {
             steps {
-                sh "mvn test"
+                sh "/usr/lib/maven/apache-maven-3.9.11/bin/mvn test"
             }
         }
        
@@ -71,13 +71,13 @@ pipeline {
         }
     }
 
-    // post {
-    //     always {
-    //         script {
-    //             sh "ls"
-    //             deleteDir()
-    //             sh "ls"
-    //         }
-    //     }
-    // }
+    post {
+        always {
+            script {
+                sh "ls"
+                deleteDir()
+                sh "ls"
+            }
+        }
+    }
 }
