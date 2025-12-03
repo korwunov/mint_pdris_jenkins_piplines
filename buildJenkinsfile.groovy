@@ -35,14 +35,13 @@ pipeline {
 
         stage('git clone') {
             steps {
-                git branch: params.branchName, url: 'https://github.com/korwunov/DigitalBookmark.git'
-                sh "cd ${params.serviceName}"
+                git branch: params.branchName, url: 'https://github.com/spring-projects/spring-petclinic.git'
             }
         }
 
         stage('Build service') {
             steps {
-                sh "/usr/lib/maven/apache-maven-3.9.11/bin/mvn -B -DskipTests clean package"
+                sh "mvn -B -DskipTests clean package"
             }
         }
 
@@ -55,7 +54,7 @@ pipeline {
         
         stage('Run test') {
             steps {
-                sh "/usr/lib/maven/apache-maven-3.9.11/bin/mvn -pl ${params.serviceName} test"
+                sh "mvn test"
             }
         }
        
