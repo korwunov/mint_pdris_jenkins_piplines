@@ -76,9 +76,9 @@ pipeline {
             steps {
                 script {
                     def jarName = ''
-                    if (params.serviceName) == 'BookmarkService' {jarName = 'bookmark-service'}
-                    if (params.serviceName) == 'AuthService' {jarName = 'auth-service'}
-                    if (params.serviceName) == 'FileService' {jarName = 'file-service'}
+                    if (params.serviceName == 'BookmarkService') {jarName = 'bookmark-service'}
+                    if (params.serviceName == 'AuthService') {jarName = 'auth-service'}
+                    if (params.serviceName == 'FileService') {jarName = 'file-service'}
 
                     def artifactVersion = "1.0.${env.BUILD_NUMBER}" // Example versioning
                     nexusArtifactUploader(
