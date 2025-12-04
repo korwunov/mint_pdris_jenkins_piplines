@@ -95,11 +95,11 @@ pipeline {
                     def distUrl = "${env.NEXUS_PROTOCOL}://${NEXUS_URL}/repository/${env.NEXUS_REPO}/${groupIdUrl}/${params.serviceName}/${artifactVersion}/${params.serviceName}-${artifactVersion}.jar"
 
                     print(
-                        "
+                        """
                             ==========================
                             distr url: ${distUrl}
                             ==========================
-                        "
+                        """
                     )
                 }
             }
