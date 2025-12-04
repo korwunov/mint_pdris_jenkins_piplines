@@ -2,13 +2,12 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'nexusAtrifactUrl', defaultValue: '', description: 'Url to get artifact from nexus')
+        string(name: 'nexusAtrifactUrl', defaultValue: '', description: 'URL to get artifact from nexus')
     }
 
     stages {
         stage('Download from Nexus') {
             environment {
-                NEXUS_URL = 'nexus:8081'
                 NEXUS_CREDS = credentials('nexus_user_password')
             }
             steps {
@@ -20,7 +19,18 @@ pipeline {
     
         stage('Deploy') {
             steps {
-                print('deploy stage here')
+                sshPublisher(publishers: [
+                    sshPublisherDesc(
+                        configName: 'prod',
+                        transfers: [
+                            sshTransfer(
+                                sourceFiles: 'distr.jar',
+                                remoteDirectory: '/home/admin',
+                                execCommand: 'java -jar distr.jar'
+                            )
+                        ]
+                    )
+                ])
             }
         }
     }
