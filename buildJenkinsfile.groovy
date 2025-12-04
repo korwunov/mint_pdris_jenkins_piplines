@@ -91,13 +91,13 @@ pipeline {
                         ]
                     )
 
-                    def groupIdUrl = env.GROUP_ID.replaceAll('.', '/')
+                    def groupIdUrl = env.GROUP_ID.replace(".", "/")
                     def distUrl = "${env.NEXUS_PROTOCOL}://${NEXUS_URL}/repository/${env.NEXUS_REPO}/${groupIdUrl}/${params.serviceName}/${artifactVersion}/${params.serviceName}-${artifactVersion}.jar"
 
                     print(
                         """
                             ==========================
-                            distr url: ${distUrl}
+                            distr url: \n ${distUrl}
                             ==========================
                         """
                     )
