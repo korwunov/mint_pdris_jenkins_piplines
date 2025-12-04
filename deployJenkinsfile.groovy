@@ -12,7 +12,6 @@ pipeline {
             }
             steps {
                 sh "wget --user=${NEXUS_CREDS_USR} --password=${NEXUS_CREDS_PSW} -O distr.jar ${params.nexusAtrifactUrl}"
-                sh "ls"
             }
         
         }
@@ -26,7 +25,7 @@ pipeline {
                             sshTransfer(
                                 sourceFiles: 'distr.jar',
                                 remoteDirectory: '/home/admin',
-                                execCommand: 'java -jar distr.jar'
+                                execCommand: 'nohup java -jar distr.jar &'
                             )
                         ]
                     )
