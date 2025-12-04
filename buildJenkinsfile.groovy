@@ -97,7 +97,7 @@ pipeline {
                     print(
                         """
                             ==========================
-                            distr url: \n ${distUrl}
+                            distr url: \n${distUrl}
                             ==========================
                         """
                     )
